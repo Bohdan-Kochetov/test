@@ -16,7 +16,7 @@ const App: React.FC = () => {
           dispatch({ type: 'add' });
         }}
       >
-        add
+        add123
 
       </button>
     </div>
