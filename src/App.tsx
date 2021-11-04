@@ -19,6 +19,8 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>List of products</h1>
+      Sort by:
+      {' '}
       <select
         value={select}
         onChange={event => {
@@ -30,15 +32,16 @@ const App: React.FC = () => {
       >
         <option value="select">Choose</option>
         <option value="alphabetically">Alphabetically</option>
-        <option value="count">By count</option>
+        <option value="count">Count</option>
       </select>
-      <ul>
+      <ul className="list-group">
         {productToRender.map((item: any) => {
           return (
             <>
-              <li key={item.id}>
-                {item.name}
+              <li key={item.id} className="list-group-item">
+                <h2 className="h2">{item.name}</h2>
                 <button
+                  className="btn btn-info"
                   type="button"
                   onClick={() => dispatch(chooseProductId(item.id))}
                 >
@@ -46,6 +49,7 @@ const App: React.FC = () => {
 
                 </button>
                 <button
+                  className="btn btn-danger"
                   type="button"
                   onClick={() => dispatch({
                     type: 'delete',
@@ -62,6 +66,7 @@ const App: React.FC = () => {
       </ul>
       <div>
         <button
+          className="btn btn-success"
           type="button"
           onClick={() => dispatch({
             type: 'add',

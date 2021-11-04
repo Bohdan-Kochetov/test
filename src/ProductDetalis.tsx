@@ -4,20 +4,24 @@ import { State } from './react-app-env';
 
 export const ProductDetalis: React.FC<{}> = () => {
   const { productToRender, productId } = useSelector((state: State) => state.reducer);
+  const { width, height } = productToRender[productId - 1].size;
+  const {
+    name, id, count, weight,
+  } = productToRender[productId - 1];
 
   return (
     <div>
       <h3>Details of Product</h3>
-      <div>{ `Name: ${(productToRender[productId - 1]).name}`}</div>
-      <div>{ `ID: ${(productToRender[productId - 1]).id}`}</div>
-      <div>{ `Count: ${(productToRender[productId - 1]).count}`}</div>
-      <div>
+      <div className="list-group-item">{ `Name: ${name}`}</div>
+      <div className="list-group-item">{ `ID: ${id}`}</div>
+      <div className="list-group-item">{ `Count: ${count}`}</div>
+      <div className="list-group-item">
         {
-          `Size: width-${(productToRender[productId - 1]).size.width}, height-${(productToRender[productId - 1]).size.height}`
+          `Size: width-${width}, height-${height}`
         }
 
       </div>
-      <div>{ `Weight: ${(productToRender[productId - 1]).weight}`}</div>
+      <div className="list-group-item">{ `Weight: ${weight}`}</div>
     </div>
   );
 };

@@ -20,8 +20,8 @@ export const FormToAdd: React.FC = () => {
   return (
     <form>
       <div className="input">
-        <div>
-          Name:
+        <div className="input-group mb-3">
+          <span className="input-group-text">Name</span>
           {' '}
           <input
             required
@@ -31,8 +31,8 @@ export const FormToAdd: React.FC = () => {
           />
 
         </div>
-        <div>
-          imageUrl :
+        <div className="input-group mb-3">
+          <span className="input-group-text">Url</span>
           <input
             required
             type="text"
@@ -41,8 +41,8 @@ export const FormToAdd: React.FC = () => {
           />
 
         </div>
-        <div>
-          Count:
+        <div className="input-group mb-3">
+          <span className="input-group-text">Count</span>
           {' '}
           <input
             required
@@ -53,8 +53,8 @@ export const FormToAdd: React.FC = () => {
           />
 
         </div>
-        <div>
-          Weight:
+        <div className="input-group mb-3">
+          <span className="input-group-text">Weight</span>
           <input
             required
             type="number"
@@ -62,8 +62,8 @@ export const FormToAdd: React.FC = () => {
             onChange={event => setWeight(+event.target.value)}
           />
         </div>
-        <div>
-          Width:
+        <div className="input-group mb-3">
+          <span className="input-group-text">Width</span>
           <input
             required
             type="number"
@@ -72,8 +72,8 @@ export const FormToAdd: React.FC = () => {
           />
 
         </div>
-        <div>
-          Height:
+        <div className="input-group mb-3">
+          <span className="input-group-text">Height</span>
           <input
             required
             type="number"
@@ -84,7 +84,8 @@ export const FormToAdd: React.FC = () => {
       </div>
 
       <button
-        type="button"
+        type="submit"
+        className="btn btn-warning"
         onClick={() => {
           dispatch(readyToAdd());
           setName('');
@@ -100,6 +101,7 @@ export const FormToAdd: React.FC = () => {
       </button>
       <button
         type="button"
+        className="btn btn-danger"
         onClick={() => {
           dispatch({
             type: 'add',
