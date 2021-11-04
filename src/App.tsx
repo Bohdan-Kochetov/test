@@ -1,24 +1,87 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { productFetchData, selected, chooseProductId } from './store/reducer';
+import { ProductDetalis } from './ProductDetalis';
+import { FormToAdd } from './FormToAdd';
 import './App.scss';
+import { State } from './react-app-env';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-  const { number } = useSelector((state: any) => state.reducer);
+  const {
+    productToRender, select, productId, add,
+  } = useSelector((state: State) => state.reducer);
+
+  useEffect(() => {
+    dispatch(productFetchData());
+  }, [select]);
 
   return (
     <div className="App">
-      <h1>Redux list of todos</h1>
-      {number}
-      <button
-        type="button"
-        onClick={() => {
-          dispatch({ type: 'add' });
+      <h1>List of products</h1>
+      <select
+        value={select}
+        onChange={event => {
+          dispatch(selected(event.target.value));
+          dispatch({
+            type: event.target.value,
+          });
         }}
       >
-        add123
+        <option value="select">Choose</option>
+        <option value="alphabetically">Alphabetically</option>
+        <option value="count">By count</option>
+      </select>
+      <ul>
+        {productToRender.map((item: any) => {
+          return (
+            <>
+              <li key={item.id}>
+                {item.name}
+                <button
+                  type="button"
+                  onClick={() => dispatch(chooseProductId(item.id))}
+                >
+                  Show details
 
-      </button>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => dispatch({
+                    type: 'delete',
+                    id: item.id,
+                  })}
+                >
+                  Delete
+
+                </button>
+              </li>
+            </>
+          );
+        })}
+      </ul>
+      <div>
+        <button
+          type="button"
+          onClick={() => dispatch({
+            type: 'add',
+            add: true,
+          })}
+        >
+          Add Product
+
+        </button>
+      </div>
+
+      {add && (
+        <div>
+          <h2>Give me some informarion, and then I can add a product  :)</h2>
+          <FormToAdd />
+        </div>
+      )}
+      {productId && (
+        <ProductDetalis />
+      )}
     </div>
   );
 };
